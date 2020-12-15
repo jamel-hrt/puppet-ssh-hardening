@@ -67,7 +67,7 @@ class ssh_hardening::server (
     ensure => 'file',
     content => template('ssh_hardening/sshd_config.erb'),
     owner  => 'root',
-    group  => 'root'
+    group  => 'root',
     mode => '0600',
     validate_cmd => '/usr/sbin/sshd -T -C user=root -C host=localhost -C addr=localhost -C lport=22 -f %s',
     notify => Service["ssh"]
