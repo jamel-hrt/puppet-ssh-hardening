@@ -14,6 +14,7 @@ class ssh_hardening::server (
   $allow_agent_forwarding = false,
   $max_auth_retries       = 2,
   $options                = {},
+  $allowgroups            = admin
 ) {
 
   $addressfamily = $ipv6_enabled ? {
