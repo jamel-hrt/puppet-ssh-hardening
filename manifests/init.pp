@@ -64,7 +64,7 @@ class ssh_hardening(
   $cbc_required          = false,
   $weak_hmac             = false,
   $weak_kex              = false,
-  $ports                 = [ 22 ],
+  $ports                 = 22,
   $listen_to             = [],
   $host_key_files        = [
     '/etc/ssh/ssh_host_rsa_key',
