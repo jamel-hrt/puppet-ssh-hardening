@@ -57,8 +57,8 @@ class ssh_hardening::server (
     ensure => 'file',
     content => template('ssh_hardening/revoked_keys.erb'),
     owner  => 'root',
-    group  => 'root'
-    mode => '0600'
+    group  => 'root',
+    mode => '0600',
     notify => 'restart sshd'
   }
 
@@ -68,9 +68,9 @@ class ssh_hardening::server (
     content => template('ssh_hardening/sshd_config.erb'),
     owner  => 'root',
     group  => 'root'
-    mode => '0600'
+    mode => '0600',
     validate_cmd => '/usr/sbin/sshd -T -C user=root -C host=localhost -C addr=localhost -C lport=22 -f %s',
-    notify => Service["ssh"],
+    notify => Service["ssh"]
   }
 
   # create ssh_config and set permissions to root/644
