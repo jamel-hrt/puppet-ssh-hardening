@@ -74,7 +74,7 @@ class ssh_hardening::server (
     owner  => 'root',
     group  => 'root',
     mode => '0600',
-    validate_cmd => '/usr/sbin/sshd -T -C user=root -C host=localhost -C addr=localhost -C lport=22 -f %s',
+    validate_cmd => '/usr/sbin/sshd -T -C user=root -C host=localhost -C addr=localhost -C lport=22 -f %',
     notify => Service["ssh"]
   }
 
