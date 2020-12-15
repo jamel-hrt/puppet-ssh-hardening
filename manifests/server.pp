@@ -2,7 +2,7 @@ class ssh_hardening::server (
   $cbc_required           = false,
   $weak_hmac              = false,
   $weak_kex               = false,
-  $ports                  = [ 22 ],
+  $ports                  = 22,
   $listen_to              = [],
   $host_key_files         = [],
   $client_alive_interval  = 300,
