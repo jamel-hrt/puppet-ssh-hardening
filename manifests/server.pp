@@ -78,7 +78,7 @@ class ssh_hardening::server (
     ensure => 'file',
     content => template('ssh_hardening/ssh_config.erb'),
     owner  => 'root',
-    group  => 'root'
+    group  => 'root',
     mode => '0644'
   }
 
