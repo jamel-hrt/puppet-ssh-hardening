@@ -59,7 +59,7 @@ class ssh_hardening::server (
     owner  => 'root',
     group  => 'root',
     mode => '0600',
-    notify => 'restart sshd'
+    notify => Service["ssh"]
   }
 
   # create sshd_config and set permissions to root/600
@@ -83,7 +83,7 @@ class ssh_hardening::server (
   }
 
   # remove all small primes
-  exec {'':
+  exec {'/etc/ssh/moduli':
     command => "awk '$5 >= 2048' /etc/ssh/moduli > /etc/ssh/moduli.new ;
          [ -r /etc/ssh/moduli.new -a -s /etc/ssh/moduli.new ] && mv /etc/ssh/moduli.new /etc/ssh/moduli || true",
     onlyif => "test `awk '$5 < 2048' /etc/ssh/moduli | wc -l` -gt 0",
