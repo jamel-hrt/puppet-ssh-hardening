@@ -68,7 +68,7 @@ class ssh_hardening(
   $listen_to             = [],
   $host_key_files        = [
     '/etc/ssh/ssh_host_rsa_key',
-    '/etc/ssh/ssh_host_ecdsa_key'
+    '/etc/ssh/ssh_host_ecdsa_key',
     '/etc/ssh/ssh_host_ed25519_key'
     ],
   $client_alive_interval = 600,
