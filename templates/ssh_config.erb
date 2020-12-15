@@ -14,10 +14,10 @@ AddressFamily inet
 
 
 # Global defaults for all Hosts
-Host *
+Host <%= @addressfamily %>
 
 # The port at the destination should be defined
-Port 22
+Port <%= @ports %>
 
 # Identity file configuration. You may restrict available identity files. Otherwise ssh will search for a pattern and use any that matches.
 #IdentityFile ~/.ssh/identity
