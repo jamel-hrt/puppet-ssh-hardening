@@ -53,11 +53,40 @@ class ssh_hardening::server (
     group  => 'root'
   }
 
+  file {'/etc/ssh/revoked_keys':
+    ensure => 'file',
+    content => template('ssh_hardening/revoked_keys.erb'),
+    owner  => 'root',
+    group  => 'root'
+    mode => '0600'
+    notify => 'restart sshd'
+  }
+
+  # create sshd_config and set permissions to root/600
   file {'/etc/ssh/sshd_config':
     ensure => 'file',
     content => template('ssh_hardening/sshd_config.erb'),
     owner  => 'root',
     group  => 'root'
+    mode => '0600'
+    validate_cmd => '/usr/sbin/sshd -T -C user=root -C host=localhost -C addr=localhost -C lport=22 -f %s',
+    notify => Service["ssh"],
   }
 
+  # create ssh_config and set permissions to root/644
+  file {'/etc/ssh/ssh_config':
+    ensure => 'file',
+    content => template('ssh_hardening/ssh_config.erb'),
+    owner  => 'root',
+    group  => 'root'
+    mode => '0644'
+  }
+
+  # remove all small primes
+  exec {'':
+    command => 'awk '$5 >= 2048' /etc/ssh/moduli > /etc/ssh/moduli.new ;
+         [ -r /etc/ssh/moduli.new -a -s /etc/ssh/moduli.new ] && mv /etc/ssh/moduli.new /etc/ssh/moduli || true'
+    onlyif => 'test `awk '$5 < 2048' /etc/ssh/moduli | wc -l` -gt 0',
+    notify => Service["ssh"]
+  }
 }

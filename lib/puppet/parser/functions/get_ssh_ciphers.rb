@@ -29,14 +29,6 @@ Puppet::Parser::Functions.newfunction(:get_ssh_ciphers, :type => :rvalue) do |ar
   ciphers_66.default = 'chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr'
   ciphers_66['weak'] = ciphers_66['default'] + ',aes256-cbc,aes192-cbc,aes128-cbc'
 
-  ciphers_72 = {}
-  ciphers_72.default = 'chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr'
-  ciphers_72['weak'] = ciphers_72['default'] + ',aes256-cbc,aes192-cbc,aes128-cbc'
-
-  ciphers_76 = {}
-  ciphers_76.default = 'chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com,aes256-ctr,aes192-ctr,aes128-ctr'
-  ciphers_76['weak'] = ciphers_76['default'] + ',aes256-cbc,aes192-cbc,aes128-cbc'
-
   # creat the default version map (if os + version are default)
   default_vmap = {}
   default_vmap.default = ciphers_53
@@ -48,8 +40,8 @@ Puppet::Parser::Functions.newfunction(:get_ssh_ciphers, :type => :rvalue) do |ar
   m['ubuntu'] = {}
   m['ubuntu']['12'] = ciphers_53
   m['ubuntu']['14'] = ciphers_66
-  m['ubuntu']['16'] = ciphers_72
-  m['ubuntu']['18'] = ciphers_76
+  m['ubuntu']['16'] = ciphers_66
+  m['ubuntu']['18'] = ciphers_66
   m['ubuntu'].default = ciphers_53
 
   m['debian'] = {}
