@@ -84,9 +84,9 @@ class ssh_hardening::server (
 
   # remove all small primes
   exec {'':
-    command => 'awk '$5 >= 2048' /etc/ssh/moduli > /etc/ssh/moduli.new ;
-         [ -r /etc/ssh/moduli.new -a -s /etc/ssh/moduli.new ] && mv /etc/ssh/moduli.new /etc/ssh/moduli || true'
-    onlyif => 'test `awk '$5 < 2048' /etc/ssh/moduli | wc -l` -gt 0',
+    command => "awk '$5 >= 2048' /etc/ssh/moduli > /etc/ssh/moduli.new ;
+         [ -r /etc/ssh/moduli.new -a -s /etc/ssh/moduli.new ] && mv /etc/ssh/moduli.new /etc/ssh/moduli || true",
+    onlyif => "test `awk '$5 < 2048' /etc/ssh/moduli | wc -l` -gt 0",
     notify => Service["ssh"]
   }
 }
