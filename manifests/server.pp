@@ -78,15 +78,6 @@ class ssh_hardening::server (
     notify => Service["ssh"]
   }
 
-  # create ssh_config and set permissions to root/644
-  file {'/etc/ssh/ssh_config':
-    ensure => 'file',
-    content => template('ssh_hardening/ssh_config.erb'),
-    owner  => 'root',
-    group  => 'root',
-    mode => '0644'
-  }
-
   # remove all small primes
   exec {'/etc/ssh/moduli':
     command => "/usr/bin/awk '$5 >= 2048' /etc/ssh/moduli > /etc/ssh/moduli.new ;

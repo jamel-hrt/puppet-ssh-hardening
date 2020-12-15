@@ -139,10 +139,13 @@ class ssh_hardening::client (
     #VisualHostKey yes
   }
 
-  $merged_options = merge($ssh_options, $options)
-
-  class { 'ssh::client':
-    storeconfigs_enabled => false,
-    options              => delete_undef_values($merged_options),
+  # create ssh_config and set permissions to root/644
+  file {'/etc/ssh/ssh_config':
+    ensure => 'file',
+    content => template('ssh_hardening/ssh_config.erb'),
+    owner  => 'root',
+    group  => 'root',
+    mode => '0644'
   }
+
 }
