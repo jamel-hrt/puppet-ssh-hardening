@@ -99,12 +99,12 @@ class ssh_hardening(
     max_auth_retries       => $max_auth_retries,
     options                => $server_options,
   }
-  class { 'ssh_hardening::client':
-    ipv6_enabled => $ipv6_enabled,
-    ports        => $ports,
-    cbc_required => $cbc_required,
-    weak_hmac    => $weak_hmac,
-    weak_kex     => $weak_kex,
-    options      => $client_options,
-  }
+#  class { 'ssh_hardening::client':
+#    ipv6_enabled => $ipv6_enabled,
+#    ports        => $ports,
+#    cbc_required => $cbc_required,
+#    weak_hmac    => $weak_hmac,
+#    weak_kex     => $weak_kex,
+#    options      => $client_options,
+#  }
 }
